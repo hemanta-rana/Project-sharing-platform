@@ -40,7 +40,7 @@ export default function FeatureProducts() {
     },
   ];
   return (
-    <section className="py-20 bg-muted/20">
+    <section className="py-20 bg-[#f2f1ed] ">
       <div className="wrapper ">
         <div className="flex items-center justify-between mb-8">
           <SectionHeader
