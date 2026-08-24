@@ -48,7 +48,9 @@ export default function Footer() {
               />
             </div>
           </Link>
+          
         </div>
+        <p className="text-primary-foreground/60">©All rights are reserved.</p>
       </div>
     </footer>
   );
