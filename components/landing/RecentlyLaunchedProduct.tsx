@@ -1,12 +1,32 @@
-import { Calendar, RocketIcon } from "lucide-react";
+import { Calendar, RocketIcon, LoaderIcon } from "lucide-react";
 import SectionHeader from "@/components/common/Section-header";
 import ProductCard from "@/components/products/Product-card";
 import EmptyState from "../common/Empty-state";
+import { getRecentlyLauncedProduct } from "@/lib/products/product-select";
+import { Suspense } from "react";
+
+async function RecentlyLaunchedProductList() {
+  const recentlyLaunchedProducts = await getRecentlyLauncedProduct();
+
+  if (recentlyLaunchedProducts.length === 0) {
+    return (
+      <EmptyState
+        message="No newly product launched found. Try again soon!"
+        icon={Calendar}
+      />
+    );
+  }
+
+  return (
+    <div className="grid-wrapper">
+      {recentlyLaunchedProducts.map((product) => (
+        <ProductCard key={product.id} product={product} />
+      ))}
+    </div>
+  );
+}
 
 export default function RecentlyLaunchedProduct() {
-  const recentlyLaunchedProducts = [
-   
-  ];
   return (
     <section className="py-20">
       <div className="wrapper space-y-12">
@@ -15,20 +35,16 @@ export default function RecentlyLaunchedProduct() {
           icon={RocketIcon}
           description="Latest work from our community"
         />
-        {
-            recentlyLaunchedProducts.length > 0?(
-                <div className="grid-wrapper ">
-          {recentlyLaunchedProducts.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </div>
 
-            ):(
-                <EmptyState message="No newly product lauched found. Try again soon!" icon={Calendar} />
-            )
-        }
-
-        
+        <Suspense
+          fallback={
+            <div className="flex items-center justify-center py-12">
+              <LoaderIcon className="size-6 animate-spin" />
+            </div>
+          }
+        >
+          <RecentlyLaunchedProductList />
+        </Suspense>
       </div>
     </section>
   );

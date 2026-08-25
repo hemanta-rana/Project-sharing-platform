@@ -1,11 +1,36 @@
-import { db } from "@/db"
-import { products } from "@/db/schema"
-import { eq } from "drizzle-orm";
+import { db } from "@/db";
+import { products } from "@/db/schema";
+import { and, eq } from "drizzle-orm";
+import { connection } from "next/server";
+import { resolve } from "path";
 
+export async function getFeaturedProducts() {
+  "use cache"
+  const productData = await db
+    .select()
+    .from(products)
+    .where(eq(products.status, "approved"));
+  return productData;
+}
+export async function getAllPrducts() {
 
-export async function getFeaturedProducts(){
-    const productData = await db.select().from(products).where(eq(products.status, "approved"));
-    return productData;
+  const productData = await db
+    .select()
+    .from(products)
+    .where(eq(products.status, "approved"));
+  return productData;
+}
 
-    
+export async function getRecentlyLauncedProduct() {
+  await connection();
+  await new Promise((resolve) => setTimeout(resolve, 3000));
+  const productsData = await getAllPrducts();
+  const oneWeekAgo = new Date();
+  oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+
+  return productsData.filter(
+    (product) => 
+        product.createdAt &&
+        new Date(product.createdAt.toISOString()) >= oneWeekAgo,
+  );
 }

@@ -12,11 +12,13 @@ import {
   ChevronsRight,
   CompassIcon,
   HomeIcon,
+  LoaderIcon,
   SparkleIcon,
   Squirrel,
   UserIcon,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Suspense } from "react";
 
 const Logo = () => {
   return (
@@ -26,11 +28,10 @@ const Logo = () => {
           <Squirrel className="size-4 text-primary-foreground" />
         </div>
         <span className="text-xl font-bold text-red-600">i</span>
-      
       </div>
       <span className="text-black font-extrabold">B </span>
-        <span className="text-xl text-red-600 font-bold">uilt</span>
-        <span className="text-xl font-bold">This</span>
+      <span className="text-xl text-red-600 font-bold">uilt</span>
+      <span className="text-xl font-bold">This</span>
     </Link>
   );
 };
@@ -58,6 +59,11 @@ export default function Header() {
             </Link>
           </nav>
           <div className="flex items-center gap-3">
+            <Suspense fallback={<div>
+              <LoaderIcon className="size-4 animate-spin" />
+            </div>} >
+
+           
             <Show when="signed-out">
               <SignInButton />
               <SignUpButton>
@@ -76,6 +82,7 @@ export default function Header() {
               </>
               <UserButton />
             </Show>
+             </Suspense>
           </div>
         </div>
       </div>

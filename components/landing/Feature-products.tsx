@@ -1,3 +1,5 @@
+
+"use cache"
 import SectionHeader from "@/components/common/Section-header";
 import { Button } from "@/components/ui/button";
 import { ArrowRightIcon, Feather } from "lucide-react";
