@@ -10,8 +10,7 @@ export default function Home() {
       <HeroSection />
       <FeatureProducts />
 
-      
-        <RecentlyLaunchedProduct />
+      <RecentlyLaunchedProduct />
     </div>
   );
 }

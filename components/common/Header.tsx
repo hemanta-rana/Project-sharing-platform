@@ -36,7 +36,7 @@ const Logo = () => {
   );
 };
 export default function Header() {
-  const isSignedIn = false;
+  
   return (
     <header className="sticky top-0 z-50 border-b bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
       <div className="wrapper px-12">
@@ -59,30 +59,33 @@ export default function Header() {
             </Link>
           </nav>
           <div className="flex items-center gap-3">
-            <Suspense fallback={<div>
-              <LoaderIcon className="size-4 animate-spin" />
-            </div>} >
-
-           
-            <Show when="signed-out">
-              <SignInButton />
-              <SignUpButton>
-                <button className=" bg-black rounded-full text-white text-sm px-4 py-1 cursor-pointer">
-                  Sign Up
-                </button>
-              </SignUpButton>
-            </Show>
-            <Show when="signed-in">
-              <>
-                <Button className=" rounded-full px-2">
-                  <Link href={"/submit"}></Link>
-                  <span>Submit Project</span>
-                  <ChevronsRight className=" size-4" />
-                </Button>
-              </>
-              <UserButton />
-            </Show>
-             </Suspense>
+            <Suspense
+              fallback={
+                <div>
+                  <LoaderIcon className="size-4 animate-spin" />
+                </div>
+              }
+            >
+              <Show when="signed-out">
+                <SignInButton />
+                <SignUpButton>
+                  <button className=" bg-black rounded-full text-white text-sm px-4 py-1 cursor-pointer">
+                    Sign Up
+                  </button>
+                </SignUpButton>
+              </Show>
+              <Show when="signed-in">
+                <>
+                  <Button className=" rounded-full px-4 ">
+                    <Link href={"/submit"} className="flex gap-2">
+                      <span>Submit Project</span>
+                      <ChevronsRight className=" size-4" />
+                    </Link>
+                  </Button>
+                </>
+                <UserButton />
+              </Show>
+            </Suspense>
           </div>
         </div>
       </div>
