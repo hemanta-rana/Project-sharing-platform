@@ -4,6 +4,7 @@ import ProductCard from "@/components/products/Product-card";
 import EmptyState from "../common/Empty-state";
 import { getRecentlyLauncedProduct } from "@/lib/products/product-select";
 import { Suspense } from "react";
+import ProductSkeleton from "../products/Product-skeleton";
 
 async function RecentlyLaunchedProductList() {
   const recentlyLaunchedProducts = await getRecentlyLauncedProduct();
@@ -38,9 +39,7 @@ export default function RecentlyLaunchedProduct() {
 
         <Suspense
           fallback={
-            <div className="flex items-center justify-center py-12">
-              <LoaderIcon className="size-6 animate-spin" />
-            </div>
+            <ProductSkeleton />
           }
         >
           <RecentlyLaunchedProductList />
