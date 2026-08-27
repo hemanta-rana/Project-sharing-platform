@@ -2,13 +2,14 @@
 
 import { FormField } from "@/components/form-field/form-field";
 import { Button } from "@/components/ui/button";
-import { addProductAction, FormState } from "@/lib/products/product-action";
+import { addProductAction } from "@/lib/products/product-action";
 import { useActionState } from "react";
 import { Loader2Icon, SparkleIcon } from "lucide-react";
+import { FormState } from "@/app/types";
 
 const initialState: FormState = {
   success: false,
-  errors: {},
+  errors: undefined,
   message: "",
 };
 
@@ -92,7 +93,11 @@ export default function ProductSubmitForm() {
         healperText="Comma-separated tags (e.g. AI, ML, SaaS)"
       />
 
-      <Button type="submit" disabled={isPending} className="w-full rounded-full text-lg py-5">
+      <Button
+        type="submit"
+        disabled={isPending}
+        className="w-full rounded-full text-lg py-5"
+      >
         {isPending ? (
           <Loader2Icon className="size-4 animate-spin" />
         ) : (
@@ -105,4 +110,3 @@ export default function ProductSubmitForm() {
     </form>
   );
 }
-

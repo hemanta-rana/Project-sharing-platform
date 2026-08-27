@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Suspense } from "react";
+import CustomUserButton from "./custom-user-button";
 
 const Logo = () => {
   return (
@@ -83,7 +84,7 @@ export default function Header() {
                     </Link>
                   </Button>
                 </>
-                <UserButton />
+                <CustomUserButton />
               </Show>
             </Suspense>
           </div>

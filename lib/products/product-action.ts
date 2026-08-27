@@ -3,25 +3,27 @@ import { auth, currentUser } from "@clerk/nextjs/server";
 import { productShema } from "./product-validation";
 import { db } from "@/db";
 import { products } from "@/db/schema";
+import { FormState } from "@/app/types";
 
-export type FormState = {
-  success: boolean;
-  errors?: Record<string, string>;
-  message: string;
-};
 
 export const addProductAction = async (
   prevState: FormState,
   formData: FormData,
 ): Promise<FormState> => {
   try {
-    const { userId } = await auth();
+    const { userId, orgId } = await auth();
 
     if (!userId) {
       return {
         success: false,
         message: "You must be signed in to submit a product",
       };
+    }
+    if(!orgId){
+      return {
+        success: false,
+        message: "You must be a member of an organization ."
+      }
     }
 
     const user = await currentUser();
@@ -59,6 +61,7 @@ export const addProductAction = async (
       status: "pending",
       submittedBy: userEmail,
       userId: userId,
+      organizationId: orgId,
     });
 
     return {
