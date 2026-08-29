@@ -10,7 +10,7 @@ export default function VotingButton(
      voteCount,   
      productId,
     }:{
-        hasVoted: boolean;
+        hasVoted?: boolean;
         voteCount: number;
         productId:number;
     }

@@ -34,3 +34,13 @@ export async function getRecentlyLauncedProduct() {
         new Date(product.createdAt.toISOString()) >= oneWeekAgo,
   );
 }
+export async function getProductBySlug(slug: string) {
+  const [productData] = await db
+    .select()
+    .from(products)
+    .where(eq(products.slug, slug))
+    .limit(1);
+
+  return productData; // Returns a single Product object, or undefined if not found
+}
+
