@@ -19,7 +19,7 @@ export default function VotingButton(
 
   const [optimisticVoteCount, setOptimisticVoteCount] = useOptimistic(
     voteCount,
-    (current, delta: number) => Math.max(0, current + delta)
+    (current, change: number) => Math.max(0, current + change)
   );
 
   const handleUpvote = () =>{
@@ -77,4 +77,4 @@ export default function VotingButton(
             </div>
     
   );
-}
+}

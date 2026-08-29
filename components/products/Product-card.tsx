@@ -17,7 +17,7 @@ type Product = InferSelectModel<typeof products>;
 export default function ProductCard({ product }: { product: Product }) {
   const hasVoted = false;
   return (
-    <Link href={`/products/${product.id}`}>
+    <Link href={`/products/${product.slug}`}>
       <Card className=" hover:bg-primary-foreground/10 border-solid border-gray-400 min-h-45 shadow-md transition-all duration-300 ease-out hover:-translate-y-1.5 hover:scale-100 hover:shadow-xl dark:bg-slate-800">
         <CardHeader className="flex-1 ">
           <div className="flex  items-start gap-4">
