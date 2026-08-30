@@ -13,7 +13,7 @@ export async function getFeaturedProducts() {
   return productData;
 }
 export async function getAllPrducts() {
-
+  "use cache"
   const productData = await db
     .select()
     .from(products)
