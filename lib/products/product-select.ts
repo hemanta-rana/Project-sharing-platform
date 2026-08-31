@@ -12,7 +12,7 @@ export async function getFeaturedProducts() {
     .where(eq(products.status, "approved"));
   return productData;
 }
-export async function getAllPrducts() {
+export async function getAllApprovedPrducts() {
   "use cache"
   const productData = await db
     .select()
@@ -24,7 +24,7 @@ export async function getAllPrducts() {
 export async function getRecentlyLauncedProduct() {
   await connection();
   await new Promise((resolve) => setTimeout(resolve, 3000));
-  const productsData = await getAllPrducts();
+  const productsData = await getAllApprovedPrducts();
   const oneWeekAgo = new Date();
   oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
 
@@ -42,5 +42,14 @@ export async function getProductBySlug(slug: string) {
     .limit(1);
 
   return productData; // Returns a single Product object, or undefined if not found
+}
+
+
+export async function getAllPrducts() {
+  "use cache"
+  const productData = await db
+    .select()
+    .from(products);
+  return productData;
 }
 

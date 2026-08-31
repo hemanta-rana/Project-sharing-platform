@@ -1,11 +1,24 @@
 "use client";
 
-import { OrganizationSwitcher, UserButton } from "@clerk/nextjs";
-import { BuildingIcon } from "lucide-react";
+import { OrganizationSwitcher, UserButton, useUser } from "@clerk/nextjs";
+import { BuildingIcon, SettingsIcon } from "lucide-react";
 
 export default function CustomUserButton() {
+  const { user } = useUser();
+  const isAdmin = user?.publicMetadata?.isAdmin === true;
+
   return (
     <UserButton>
+      {isAdmin && (
+        <UserButton.MenuItems>
+          <UserButton.Link
+            label="Admin Panel"
+            labelIcon={<SettingsIcon className="size-4" />}
+            href="/admin"
+          />
+        </UserButton.MenuItems>
+      )}
+      
       <UserButton.UserProfilePage
         label="Organization"
         labelIcon={<BuildingIcon className="size-4" />}
