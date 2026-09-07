@@ -222,6 +222,3 @@ Make sure your Clerk application has the correct **Allowed redirect URLs** set t
 
 ---
 
-## License
-
-MIT
